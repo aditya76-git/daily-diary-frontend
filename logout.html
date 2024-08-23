@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" class="dark">
+
+<head>
+
+    <title>Log Out - Daily Diary</title>
+
+    <link rel="stylesheet" href="/assets/css/custom.css">
+
+
+
+    <script>
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-800">
+
+
+
+    <main class="bg-gray-50 dark:bg-gray-900">
+
+        <div class="flex flex-col justify-center items-center px-6 mx-auto h-screen xl:px-0 dark:bg-gray-900">
+
+            <div class="text-center xl:max-w-4xl">
+                <h1 class="mb-3 text-2xl font-bold leading-tight text-gray-900 sm:text-4xl lg:text-5xl dark:text-white">
+                    Please Wait...</h1>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Alert div -->
+    <div id="alert-box"
+        class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
+        role="alert" style="display: none; position: fixed; top: 10px; right: 10px; z-index: 1000;">
+
+        <div class="ms-3 text-sm font-medium" id="alert-message">
+            <!-- Alert message will be displayed here -->
+        </div>
+    </div>
+
+    <script src="/assets/js/script.js"></script>
+
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="https://flowbite-admin-dashboard.vercel.app//app.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"
+        integrity="sha512-axJX7DJduStuBB8ePC8ryGzacZPr3rdLaIDZitiEgWWk2gsXxEFlm4UW0iNzj2h3wp5mOylgHAzBzM4nRSvTZA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://flowbite.com/docs/flowbite.min.js?v=2.5.1a"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.2/datepicker.min.js"></script>
+</body>
+
+</html>

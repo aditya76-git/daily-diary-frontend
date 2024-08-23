@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Daily Diary - Your personal digital journal - Capture life's moments, big and small">
+    <meta name="author" content="Themesberg">
+    <meta name="generator" content="Hugo 0.58.2">
+
+    <title>Dashboard - Daily Diary</title>
+
+    <link rel="canonical" href="https://daily-diary-web.netlify.app/dashboard">
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="Dashboard - Daily Diary">
+    <meta name="twitter:description"
+        content="Daily Diary - Your personal digital journal - Capture life's moments, big and small">
+
+    <!-- Facebook -->
+    <meta property="og:url" content="https://daily-diary-web.netlify.app/dashboard">
+    <meta property="og:title" content="Dashboard - Daily Diary">
+    <meta property="og:description"
+        content="Daily Diary - Your personal digital journal - Capture life's moments, big and small">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/assets/img/og-image.png">
+    <meta property="og:image:type" content="image/png">
+
+
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+
+    <script>
+        // Add Entry Form
+        document.addEventListener('DOMContentLoaded', function () {
+            const titleInput = document.getElementById('title');
+            const slugInput = document.getElementById('slug');
+
+            function textToSlug(text) {
+                return text
+                    .toLowerCase()
+                    .replace(/[^\w ]+/g, '')
+                    .replace(/ +/g, '-');
+            }
+
+            titleInput.addEventListener('input', function () {
+                slugInput.value = textToSlug(this.value.trim());
+            });
+        });
+
+
+        // This code will automatically detect and attach the event listeners to new modals as they are added to the DOM. - GPT
+
+        // I don't know what is going on here, but since it is working, I won't be touching it
+        document.addEventListener('DOMContentLoaded', function () {
+            const observer = new MutationObserver((mutationsList, observer) => {
+                mutationsList.forEach(mutation => {
+                    if (mutation.type === 'childList') {
+                        mutation.addedNodes.forEach(node => {
+                            if (node.nodeType === 1 && node.matches('[id^="edit-entry-modal-"]')) {
+                                const titleInput = node.querySelector('[id^="title"]');
+                                const slugInput = node.querySelector('[id^="slug"]');
+
+                                function textToSlug(text) {
+                                    return text
+                                        .toLowerCase()
+                                        .replace(/[^\w ]+/g, '')
+                                        .replace(/ +/g, '-');
+                                }
+
+                                titleInput.addEventListener('input', function () {
+                                    slugInput.value = textToSlug(this.value.trim());
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+
+            observer.observe(document.body, { childList: true, subtree: true });
+        });
+
+
+
+
+
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-800">
+
+
+
+
+    <nav class="fixed z-30 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        <div class="px-3 py-3 lg:px-5 lg:pl-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center justify-start">
+                    <button id="toggleSidebarMobile" aria-expanded="true" aria-controls="sidebar"
+                        class="p-2 text-gray-600 rounded cursor-pointer lg:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        <svg id="toggleSidebarMobileHamburger" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <svg id="toggleSidebarMobileClose" class="hidden w-6 h-6" fill="currentColor"
+                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                    <a href="" data-link="dashboard" class="flex ml-2 md:mr-24">
+                        <img src="assets/img/favicon.png" class="h-8 mr-3" alt="Daily Diary Logo" />
+                        <span
+                            class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Daily
+                            Diary</span>
+                    </a>
+
+
+                    <div class="hidden lg:block lg:pl-3.5">
+                        <label for="topbar-search" class="sr-only">Search</label>
+                        <div class="relative mt-1 lg:w-96">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <input type="text" name="search" id="topbar-search"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                placeholder="Search" autocomplete="off">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="flex items-center">
+
+                    <button id="toggleSidebarMobileSearch" type="button"
+                        class="p-2 text-gray-500 rounded-lg lg:hidden hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        <span class="sr-only">Search</span>
+
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+
+                    <button type="button" data-dropdown-toggle="notification-dropdown"
+                        class="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700">
+                        <span class="sr-only">View notifications</span>
+
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <div class="z-20 z-50 hidden max-w-sm my-4 overflow-hidden text-base list-none bg-white divide-y divide-gray-100 rounded shadow-lg dark:divide-gray-600 dark:bg-gray-700"
+                        id="notification-dropdown">
+                        <div
+                            class="block px-4 py-2 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            Notifications
+                        </div>
+                        <div>
+                            <a href="#"
+                                class="flex px-4 py-3 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
+                                <div class="flex-shrink-0">
+                                    <img class="rounded-full w-11 h-11"
+                                        src="https://avatars.githubusercontent.com/u/116014666?v=4&size=64"
+                                        alt="Jese image">
+                                    <div
+                                        class="absolute flex items-center justify-center w-5 h-5 ml-6 -mt-5 border border-white rounded-full bg-primary-700 dark:border-gray-700">
+                                        <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z">
+                                            </path>
+                                            <path
+                                                d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="w-full pl-3">
+                                    <div class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">New message
+                                        from <span
+                                            class="font-semibold text-gray-900 dark:text-white">@aditya76-git</span>:
+                                        <br />
+                                        "Hey, what's up? All set for exploring the web app?"
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <a href="#"
+                            class="block py-2 text-base font-normal text-center text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-700 dark:text-white dark:hover:underline">
+                            <div class="inline-flex items-center ">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                                    <path fill-rule="evenodd"
+                                        d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                View all
+                            </div>
+                        </a>
+                    </div>
+
+
+
+
+
+
+                    <button id="theme-toggle" data-tooltip-target="tooltip-toggle" type="button"
+                        class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                        <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                        <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                fill-rule="evenodd" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                    <div id="tooltip-toggle" role="tooltip"
+                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                        Toggle dark mode
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+
+                    <div class="flex items-center ml-3">
+                        <div>
+                            <button type="button"
+                                class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                                id="user-menu-button-2" aria-expanded="false" data-dropdown-toggle="dropdown-2">
+                                <span class="sr-only">Open user menu</span>
+                                <img class="w-8 h-8 rounded-full" src="" id="dashboard-profile-picture-top"
+                                    alt="user photo">
+                            </button>
+                        </div>
+
+                        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+                            id="dropdown-2">
+                            <div class="px-4 py-3" role="none">
+                                <p class="text-sm text-gray-900 dark:text-white" role="none"
+                                    id="dashboard-username-top">
+
+                                </p>
+                            </div>
+
+                            <ul class="py-1" role="none">
+                                <li>
+                                    <a href="" data-link="dashboard"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        role="menuitem">Dashboard</a>
+                                </li>
+                                <li>
+                                    <a href="" data-link="logout"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        role="menuitem">Sign out</a>
+                                </li>
+                            </ul>
+
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
+
+        <aside id="sidebar"
+            class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 hidden w-64 h-full pt-16 font-normal duration-75 lg:flex transition-width"
+            aria-label="Sidebar">
+            <div
+                class="relative flex flex-col flex-1 min-h-0 pt-0 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                <div class="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
+                    <div
+                        class="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+
+                        <!-- User Info Section -->
+                        <div class="flex items-center p-4 mb-4 rounded-lg dark:bg-gray-900 bg-gray-50">
+                            <div class="inline-flex items-center justify-center w-10 h-10 mr-3">
+                                <img src="" id="dashboard-profile-picture-sidebar" alt="User Image"
+                                    class="w-10 h-10 rounded-full">
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-medium text-gray-900 dark:text-white"
+                                    id="dashboard-username-sidebar"></h3>
+                                <p class="text-xs text-gray-500 dark:text-gray-400" id="dashboard-userid-sidebar"></p>
+                            </div>
+
+
+                            <button class="ml-auto text-gray-400 dark:text-gray-500">
+                                <a href="" data-link="logout">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"></path>
+                                    </svg>
+
+                                </a>
+                            </button>
+
+                        </div>
+
+                        <ul class="pb-2 space-y-2">
+
+
+
+                            <li>
+                                <form action="#" method="GET" class="lg:hidden">
+                                    <label for="mobile-search" class="sr-only">Search</label>
+                                    <div class="relative">
+                                        <div
+                                            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                        </div>
+                                        <input type="text" name="email" id="mobile-search"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200 dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Search" autocomplete="off">
+                                    </div>
+                                </form>
+                            </li>
+                            <li>
+                                <a href="" data-link="dashboard"
+                                    class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                        viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5" />
+                                    </svg>
+
+
+                                    <span class="ml-3" sidebar-toggle-item>Dashboard</span>
+                                </a>
+                            </li>
+
+
+                            <li>
+                                <a class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 cursor-pointer"
+                                    data-modal-toggle="add-entry-modal">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                        viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="M5 12h14m-7 7V5" />
+                                    </svg>
+
+                                    <span class="ml-3" sidebar-toggle-item>Add New Entry</span>
+                                </a>
+                            </li>
+
+
+
+                            <li>
+                                <a class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 cursor-pointer"
+                                    data-modal-toggle="add-category-modal">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                        viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M14 8H4m8 3.5v5M9.5 14h5M4 6v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1h-5.032a1 1 0 0 1-.768-.36l-1.9-2.28a1 1 0 0 0-.768-.36H5a1 1 0 0 0-1 1Z" />
+                                    </svg>
+
+
+                                    <span class="ml-3" sidebar-toggle-item>Add
+                                        New Category</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 cursor-pointer"
+                                    data-modal-toggle="daily-check-in-modal">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                        viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M18.122 17.645a7.185 7.185 0 0 1-2.656 2.495 7.06 7.06 0 0 1-3.52.853 6.617 6.617 0 0 1-3.306-.718 6.73 6.73 0 0 1-2.54-2.266c-2.672-4.57.287-8.846.887-9.668A4.448 4.448 0 0 0 8.07 6.31 4.49 4.49 0 0 0 7.997 4c1.284.965 6.43 3.258 5.525 10.631 1.496-1.136 2.7-3.046 2.846-6.216 1.43 1.061 3.985 5.462 1.754 9.23Z" />
+                                    </svg>
+
+
+
+                                    <span class="ml-3" sidebar-toggle-item>Daily Check-In</span>
+                                </a>
+                            </li>
+
+
+
+
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+
+        <div class="fixed inset-0 z-10 hidden bg-gray-900/50 dark:bg-gray-900/90" id="sidebarBackdrop"></div>
+
+        <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
+            <main>
+                <div class="px-4 pt-6">
+
+
+                    <div
+                        class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                        <!-- Card header -->
+                        <div class="items-center justify-between lg:flex">
+                            <div class="mb-4 lg:mb-0">
+                                <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">Entries</h3>
+                                <span class="text-base font-normal text-gray-500 dark:text-gray-400"
+                                    id="dashboard-entries-listing-heading">List of your
+                                    diary
+                                    entries</span>
+                            </div>
+
+
+                            <div class="flex items-center ml-auto space-x-2 sm:space-x-3">
+
+                                <p class="text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white"
+                                    id="dashboard-streak-count">0🔥
+                                </p>
+
+                                <button type="button" data-modal-toggle="daily-check-in-modal"
+                                    class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                    <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>Check-In
+                                </button>
+
+                                <button type="button" data-modal-toggle="add-entry-modal"
+                                    class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                    <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    Add
+                                </button>
+                            </div>
+
+
+                        </div>
+
+                        <!-- Table -->
+                        <div class="flex flex-col mt-6">
+                            <div class="overflow-x-auto rounded-lg">
+                                <div class="inline-block min-w-full align-middle">
+                                    <div class="overflow-hidden shadow sm:rounded-lg">
+                                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                                            <thead class="bg-gray-50 dark:bg-gray-700">
+                                                <tr>
+                                                    <th scope="col"
+                                                        class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                                                        Title
+                                                    </th>
+                                                    <th scope="col"
+                                                        class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                                                        Category
+                                                    </th>
+                                                    <th scope="col"
+                                                        class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                                                        Created at
+                                                    </th>
+
+                                                    <th scope="col"
+                                                        class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                                                        Emoji
+                                                    </th>
+                                                    <th scope="col"
+                                                        class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                                                        Actions
+                                                    </th>
+                                                    <th scope="col"
+                                                        class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                                                        Status
+                                                    </th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody class="bg-white dark:bg-gray-800" id="main-diary-entries-table-body">
+                                                <tr class="animate-pulse">
+                                                    <td colspan="6" class="p-4">
+                                                        <div
+                                                            class="h-3.5 bg-gray-300 rounded-full dark:bg-gray-600 w-full">
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr class="animate-pulse">
+                                                    <td colspan="6" class="p-4">
+                                                        <div
+                                                            class="h-3.5 bg-gray-300 rounded-full dark:bg-gray-600 w-full">
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr class="animate-pulse">
+                                                    <td colspan="6" class="p-4">
+                                                        <div
+                                                            class="h-3.5 bg-gray-300 rounded-full dark:bg-gray-600 w-full">
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <!-- Alert div -->
+                <div id="auth-alert"
+                    class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
+                    role="alert" style="display: none; position: fixed; top: 10px; right: 10px; z-index: 1000;">
+
+                    <div class="ms-3 text-sm font-medium" id="alert-message">
+                        <!-- Alert message will be displayed here -->
+                    </div>
+                    <button type="button"
+                        class="ms-auto -mx-1.5 -my-1.5 bg-blue-50 text-blue-500 rounded-lg focus:ring-2 focus:ring-blue-400 p-1.5 hover:bg-blue-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700"
+                        aria-label="Close">
+                        <span class="sr-only">Close</span>
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                    </button>
+                </div>
+
+
+
+
+
+                <!-- Add Entry Modal -->
+                <div class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full"
+                    id="add-entry-modal">
+                    <div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+                            <!-- Modal header -->
+                            <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
+                                <h3 class="text-xl font-semibold dark:text-white">
+                                    Add new entry
+                                </h3>
+                                <button type="button"
+                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white"
+                                    data-modal-target="add-entry-modal" data-modal-toggle="add-entry-modal">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+
+
+                            <div class="p-6 space-y-6">
+                                <form id="add-entry-form" action="#">
+                                    <div class="grid grid-cols-6 gap-6">
+                                        <div class="col-span-6">
+                                            <label for="title"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                                            <input type="text" name="title" id="title"
+                                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                placeholder="Enter title" required>
+                                        </div>
+                                        <div class="col-span-6">
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categories</label>
+                                            <div class="flex items-center">
+                                                <button id="dropdownDefault" data-dropdown-toggle="dropdown"
+                                                    class="inline-flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                                                    type="button"> Select categories <svg class="w-4 h-4 ml-2"
+                                                        aria-hidden="true" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                    </svg>
+                                                </button>
+                                                <div id="dropdown"
+                                                    class="z-10 hidden w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
+                                                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+                                                        Categories</h6>
+                                                    <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                                                        <div id="dashboard-add-entry-categories-list"></div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-2">
+                                            <label for="slug"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slug</label>
+                                            <input type="text" name="slug" id="slug"
+                                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                autocomplete="off">
+                                        </div>
+                                        <div class="col-span-2">
+                                            <label for="emoji"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Emoji</label>
+                                            <input type="text" name="emoji" id="emoji"
+                                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                placeholder="Enter emoji" autocomplete="off">
+                                        </div>
+                                        <div class="col-span-2">
+                                            <label for="sharing"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sharing</label>
+                                            <input type="checkbox" name="sharing" id="sharing"
+                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        </div>
+                                        <div class="col-span-6">
+                                            <label for="description"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                                            <textarea id="description" name="description" rows="4"
+                                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                placeholder="Enter description"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <!-- Submit button moved inside the form -->
+                                    <div class="col-span-6">
+                                        <button type="submit"
+                                            class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                            Add Entry
+                                            <div class="add-entry-loader" style="display: none;"></div>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Check-In Modal -->
+                <div class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full"
+                    id="daily-check-in-modal">
+                    <div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+                            <!-- Modal header -->
+                            <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
+                                <h3 class="text-xl font-semibold dark:text-white">
+                                    Daily Check-In 🔥
+                                </h3>
+                                <button type="button"
+                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white"
+                                    data-modal-target="daily-check-in-modal" data-modal-toggle="daily-check-in-modal">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+
+
+                            <div class="p-6 space-y-6">
+                                <form action="#">
+                                    <div class="grid grid-cols-6 gap-6">
+                                        <div class="col-span-6">
+                                            <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                Check In daily to increase your streak counter. This will encourage to
+                                                write daily. Missing a day will make your streak go back to 0!</p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <br />
+                                    <!-- Submit button moved inside the form -->
+                                    <div class="col-span-6">
+                                        <button type="submit" id="check-in-streak-button"
+                                            class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                            Check In
+                                            <div class="add-streak-loader" style="display: none;"></div>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Add Category Modal -->
+                <div class="fixed left-0 right-0 z-50 items-center justify-center hidden overflow-x-hidden overflow-y-auto top-4 md:inset-0 h-modal sm:h-full"
+                    id="add-category-modal">
+                    <div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+                            <!-- Modal header -->
+                            <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
+                                <h3 class="text-xl font-semibold dark:text-white">
+                                    Add new category
+                                </h3>
+                                <button type="button"
+                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white"
+                                    data-modal-target="add-category-modal" data-modal-toggle="add-category-modal">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+
+
+                            <div class="p-6 space-y-6">
+                                <form id="add-category-form" action="#">
+                                    <div class="grid grid-cols-6 gap-6">
+                                        <div class="col-span-6">
+                                            <label for="title"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                                            <input type="text" name="category" id="category"
+                                                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                placeholder="Enter Category" autocomplete="off" required>
+                                        </div>
+
+                                    </div>
+
+                                    <br />
+                                    <!-- Submit button moved inside the form -->
+                                    <div class="col-span-6">
+                                        <button type="submit"
+                                            class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                            Add Category
+                                            <div class="add-category-loader" style="display: none;"></div>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <!-- Alert div -->
+                <div id="alert-box"
+                    class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
+                    role="alert" style="display: none; position: fixed; top: 10px; right: 10px; z-index: 1000;">
+
+                    <div class="ms-3 text-sm font-medium" id="alert-message">
+                        <!-- Alert message will be displayed here -->
+                    </div>
+                </div>
+
+            </main>
+
+            <p class="my-10 text-sm text-center text-gray-500">
+                &copy; 2024 <a href="" data-link="dashboard" class="hover:underline" target="_blank">Daily Diary</a>.
+                All rights reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+
+    <script src="/assets/js/script.js"></script>
+
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="https://flowbite-admin-dashboard.vercel.app//app.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"
+        integrity="sha512-axJX7DJduStuBB8ePC8ryGzacZPr3rdLaIDZitiEgWWk2gsXxEFlm4UW0iNzj2h3wp5mOylgHAzBzM4nRSvTZA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://flowbite.com/docs/flowbite.min.js?v=2.5.1a"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.2/datepicker.min.js"></script>
+
+</body>
+
+</html>

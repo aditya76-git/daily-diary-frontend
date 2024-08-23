@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Log In Page - Daily Diary">
+
+    <title>Log In Page - Daily Diary</title>
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="Log In Page - Daily Diary">
+    <meta name="twitter:description" content="Log In Page - Daily Diary">
+    <meta name="twitter:image" content="assets/img/favicon.png">
+
+    <!-- Facebook -->
+    <meta property="og:url" content="https://flowbite-admin-dashboard.vercel.app/authentication/sign-up/">
+    <meta property="og:title" content="Tailwind CSS Sign Up/Register Page - Flowbite">
+    <meta property="og:description"
+        content="Get started with a free and open-source admin dashboard layout built with Tailwind CSS and Flowbite featuring charts, widgets, CRUD layouts, authentication pages, and more">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://flowbite-admin-dashboard.vercel.app/images/og-image.png">
+    <meta property="og:image:type" content="image/png">
+
+
+    <link rel="stylesheet" href="/assets/css/custom.css">
+
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-141734189-9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-141734189-9');
+    </script>
+
+
+    <script>
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('v2fLMH8w3xgUEQcl63H9');
+        } else {
+            document.documentElement.classList.remove('v2fLMH8w3xgUEQcl63H9')
+        }
+    </script>
+</head>
+
+
+<main class="bg-gray-50 dark:bg-gray-900">
+    <div class="flex flex-col items-center justify-center px-6 pt-8 mx-auto md:h-screen pt:mt-0 dark:bg-gray-900">
+        <a href="" class="flex items-center justify-center mb-8 text-2xl font-semibold lg:mb-10 dark:text-white">
+            <img src="assets/img/favicon.png" class="mr-4 h-11" alt="Daily Diary Logo">
+            <span>Daily Diary</span>
+        </a>
+        <!-- Card -->
+        <div class="w-full max-w-xl p-6 space-y-8 sm:p-8 bg-white rounded-lg shadow dark:bg-gray-800">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+                Sign In
+            </h2>
+            <form id="login-form" class="mt-8 space-y-6" action="#">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                            username</label>
+                        <input type="username" name="username" id="username"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="xyz" autocomplete="off" required>
+                    </div>
+                    <div>
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                            password</label>
+                        <input type="password" name="password" id="password" placeholder="••••••••"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            required>
+                    </div>
+                </div>
+
+                <button type="submit"
+                    class="w-full px-5 py-3 text-base font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Login
+                    to your account <div class="auth-loader" style="display: none;"></div>
+                </button>
+
+                <div class="flex items-center justify-center">
+                    <hr class="w-full border-gray-300 dark:border-gray-600">
+                    <span class="px-3 text-gray-500 dark:text-gray-400">OR</span>
+                    <hr class="w-full border-gray-300 dark:border-gray-600">
+                </div>
+
+                <button type="button" id="login-with-google-button"
+                    class="w-full px-5 py-3 text-base font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700">
+                    <svg class="w-4 h-4 mr-2 inline" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_13183_10121)">
+                            <path
+                                d="M20.3081 10.2303C20.3081 9.55056 20.253 8.86711 20.1354 8.19836H10.7031V12.0492H16.1046C15.8804 13.2911 15.1602 14.3898 14.1057 15.0879V17.5866H17.3282C19.2205 15.8449 20.3081 13.2728 20.3081 10.2303Z"
+                                fill="#3F83F8" />
+                            <path
+                                d="M10.7019 20.0006C13.3989 20.0006 15.6734 19.1151 17.3306 17.5865L14.1081 15.0879C13.2115 15.6979 12.0541 16.0433 10.7056 16.0433C8.09669 16.0433 5.88468 14.2832 5.091 11.9169H1.76562V14.4927C3.46322 17.8695 6.92087 20.0006 10.7019 20.0006V20.0006Z"
+                                fill="#34A853" />
+                            <path
+                                d="M5.08857 11.9169C4.66969 10.6749 4.66969 9.33008 5.08857 8.08811V5.51233H1.76688C0.348541 8.33798 0.348541 11.667 1.76688 14.4927L5.08857 11.9169V11.9169Z"
+                                fill="#FBBC04" />
+                            <path
+                                d="M10.7019 3.95805C12.1276 3.936 13.5055 4.47247 14.538 5.45722L17.393 2.60218C15.5852 0.904587 13.1858 -0.0287217 10.7019 0.000673888C6.92087 0.000673888 3.46322 2.13185 1.76562 5.51234L5.08732 8.08813C5.87733 5.71811 8.09302 3.95805 10.7019 3.95805V3.95805Z"
+                                fill="#EA4335" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_13183_10121">
+                                <rect width="20" height="20" fill="white" transform="translate(0.5)" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    Login with Google <div class="google-auth-loader" style="display: none;"></div>
+                </button>
+
+                <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                    Not registered? <a class="text-primary-700 hover:underline dark:text-primary-500" href=""
+                        data-link="signup">Create
+                        account</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <!-- Alert div -->
+    <div id="alert-box"
+        class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
+        role="alert" style="display: none; position: fixed; top: 10px; right: 10px; z-index: 1000;">
+
+        <div class="ms-3 text-sm font-medium" id="alert-message">
+            <!-- Alert message will be displayed here -->
+        </div>
+    </div>
+
+
+</main>
+
+
+
+
+<script src="/assets/js/script.js"></script>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="https://flowbite-admin-dashboard.vercel.app//app.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"
+    integrity="sha512-axJX7DJduStuBB8ePC8ryGzacZPr3rdLaIDZitiEgWWk2gsXxEFlm4UW0iNzj2h3wp5mOylgHAzBzM4nRSvTZA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://flowbite.com/docs/flowbite.min.js?v=2.5.1a"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.2/datepicker.min.js"></script>
+
+</html>
